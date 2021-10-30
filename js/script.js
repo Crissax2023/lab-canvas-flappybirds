@@ -18,7 +18,11 @@ window.onload = function() {
 
   }
 
-  function gameOver(){}
+  function gameOver(){
+
+    bg.gameOver()
+    requestId = undefined
+  }
 
   function update(){
 
@@ -27,11 +31,53 @@ window.onload = function() {
     ctx.clearRect(0,0,canvas.width,canvas.height)
     bg.draw()
     flappy.draw()
+    generatePipes()
+    drawPipes()
+    ctx.font= "40px Arial"
+
+    ctx.fillText(`Score: ${points}`,600,100)
+
+    if(flappy.y + flappy.height > canvas.height)
+    {
+      gameOver()
+    }
 
     if(requestId)
     {
       requestId = requestAnimationFrame(update)
     }
+  }
+
+  function generatePipes(){
+
+    if(!(frames % 160 === 0)){
+    return true
+    }                                    //floor*max-min+min
+    const height = Math.floor(Math.random()*(canvas.height*0.6))+60;
+    const pipe1 = new pipe("top",canvas.width,0,height)
+    const pipe2 = new pipe("eldeabajo",canvas.width,0,height+120,canvas.height - 120 - height)
+
+    pipes.push(pipe1,pipe2)
+    
+    
+  }
+
+  function drawPipes(){
+
+    pipes.forEach((pipe,index_pipe)=>{
+      if(pipe.x <-30)
+      {
+        points ++
+        pipe.splice(index_pipe,1)
+      }
+      pipe.draw()
+      if(flappy.collision(pipe))
+      {
+        gameOver()
+      }
+      
+
+    })
   }
 
   addEventListener("keydown",(e)=>{

@@ -98,7 +98,7 @@ class Background
         {
             this.x =x
             this.y=y
-            this.with = 30
+            this.with = 60
             this.height = h
             this.image= new Image()
             this.image.src =

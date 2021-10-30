@@ -9,7 +9,7 @@ const gravity = 0.2
 let pipes =[]
 
 let points =0
-let diff=1
+let diff=1 //dificultad
 let requestId
 
 //audio
@@ -22,5 +22,5 @@ let vida = {
     vida :3,
     status: "pequeño",
     moneda:0
-    
+
 }
