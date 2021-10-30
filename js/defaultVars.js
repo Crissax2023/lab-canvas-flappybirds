@@ -17,3 +17,10 @@ let requestId
 const audio = new Audio()
 //audio.src =""
 
+let vida = {
+
+    vida :3,
+    status: "pequeño",
+    moneda:0
+    
+}

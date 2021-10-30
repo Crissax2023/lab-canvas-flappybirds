@@ -12,6 +12,7 @@ class Background
             this.height =h
             this.image =new Image()
             this.image.src =  "../images/bg.png"
+            this.imgGameOver = new Image()
     }
 
 
@@ -55,6 +56,21 @@ class Background
         {
             //validar gravedad
 
+            this.vy = this.vy + (gravity - this.userPull)
+            if(this.y <=0 )
+            {
+                this.userPull =0 ;
+                this.y =2
+                this.vy = 2
+            }
+
+
+            //modificar su  con la gravedd
+            if(this.y + this.height < canvas.height)
+            {
+                this.y += this.vy
+
+            }
 
             //dibujar
 
@@ -71,6 +87,33 @@ class Background
                 this.y < this.y + item.height &&
                 this.y + this.height > item.y
             )
+
+        }
+    }
+
+
+    class pipe{
+
+        constructor(pos,y,x,h)
+        {
+            this.x =x
+            this.y=y
+            this.with = 30
+            this.height = h
+            this.image= new Image()
+            this.image.src =
+            pos == "top"
+            ? "../images/obstacle_top.png"
+            :
+            "../images/obstacle_bottom.png";
+
+        }
+
+        draw()
+        {
+
+            this.x -=2
+            ctx.drawImage(this.image,this.x,this.y,this.with,this.height)
 
         }
     }
